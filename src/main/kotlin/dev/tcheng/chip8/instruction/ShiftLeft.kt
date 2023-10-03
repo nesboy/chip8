@@ -1,6 +1,6 @@
 package dev.tcheng.chip8.instruction
 
-import dev.tcheng.chip8.data.Radix
+import dev.tcheng.chip8.data.Constant
 import dev.tcheng.chip8.data.State
 
 data object ShiftLeft : Instruction {
@@ -10,7 +10,7 @@ data object ShiftLeft : Instruction {
 
     @OptIn(ExperimentalUnsignedTypes::class)
     override fun execute(state: State, instruction: String) {
-        val vRegisterIndex = instruction[1].digitToInt(Radix.BASE_16)
+        val vRegisterIndex = instruction[1].digitToInt(Constant.HEXADECIMAL)
         val vRegisterValue = state.vRegisters[vRegisterIndex]
 
         state.vRegisters[0xF] = if (vRegisterValue.takeHighestOneBit() == 1u.toUByte()) 1u else 0u

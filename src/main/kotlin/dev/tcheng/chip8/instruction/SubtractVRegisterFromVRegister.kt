@@ -1,6 +1,6 @@
 package dev.tcheng.chip8.instruction
 
-import dev.tcheng.chip8.data.Radix
+import dev.tcheng.chip8.data.Constant
 import dev.tcheng.chip8.data.State
 
 data object SubtractVRegisterFromVRegister : Instruction {
@@ -10,8 +10,8 @@ data object SubtractVRegisterFromVRegister : Instruction {
 
     @OptIn(ExperimentalUnsignedTypes::class)
     override fun execute(state: State, instruction: String) {
-        val vRegisterIndex1 = instruction[1].digitToInt(Radix.BASE_16)
-        val vRegisterIndex2 = instruction[2].digitToInt(Radix.BASE_16)
+        val vRegisterIndex1 = instruction[1].digitToInt(Constant.HEXADECIMAL)
+        val vRegisterIndex2 = instruction[2].digitToInt(Constant.HEXADECIMAL)
 
         val difference = state.vRegisters[vRegisterIndex1].minus(state.vRegisters[vRegisterIndex2])
         state.vRegisters[vRegisterIndex1] = difference.toUByte() // may cause underflow

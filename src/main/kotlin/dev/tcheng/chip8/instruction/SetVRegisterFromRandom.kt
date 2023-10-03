@@ -1,6 +1,6 @@
 package dev.tcheng.chip8.instruction
 
-import dev.tcheng.chip8.data.Radix
+import dev.tcheng.chip8.data.Constant
 import dev.tcheng.chip8.data.State
 import kotlin.random.Random
 
@@ -11,8 +11,8 @@ data object SetVRegisterFromRandom : Instruction {
 
     @OptIn(ExperimentalUnsignedTypes::class)
     override fun execute(state: State, instruction: String) {
-        val vRegisterIndex = instruction[1].digitToInt(Radix.BASE_16)
-        val value = instruction.substring(2).toUByte(Radix.BASE_16)
+        val vRegisterIndex = instruction[1].digitToInt(Constant.HEXADECIMAL)
+        val value = instruction.substring(2).toUByte(Constant.HEXADECIMAL)
         state.vRegisters[vRegisterIndex] = value.and(Random.nextBits(Byte.SIZE_BITS).toUByte())
     }
 }
